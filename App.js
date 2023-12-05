@@ -1,73 +1,44 @@
-import React from "react";
-import {
-  Text,
-  Link,
-  HStack,
-  Center,
-  Heading,
-  Switch,
-  useColorMode,
-  Flex,
-  Badge,
-  NativeBaseProvider,
-  extendTheme,
-  VStack,
-  Box,
-  Button,
-  Spacer,
-  Pressable,
-} from "native-base";
-import NativeBaseIcon from "./components/NativeBaseIcon";
-import { Platform } from "react-native";
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import 'react-native-gesture-handler';
+const Stack = createStackNavigator();
 
-// Define the config
-const config = {
-  useSystemColorMode: false,
-  initialColorMode: "dark",
-};
-
-// extend the theme
-export const theme = extendTheme({ config });
+import MainScreen from "./page";
+import AttributeScreen from "./page/sub/attribute";
+import AllergyScreen from "./page/sub/allergy";
+import CustomScreen from "./page/sub/CustomScreen";
+import EndScreen from "./page/sub/end";
 
 export default function App() {
   return (
-    <NativeBaseProvider>
-      
-      <VStack space={6} alignItems="center">
-        <Box alignItems="center" >
-          <Pressable onPress={() => console.log("I'm Pressed")} borderWidth="3" borderColor="black" w="96" shadow="3" bg="white" p="5">
-            <Box>
-              <Text color="coolGray.800" fontWeight="medium" fontSize="6xl">
-                日本語
-              </Text>
-            </Box>
-          </Pressable>
-        </Box>
+      <NavigationContainer>
+        <Stack.Navigator
+            screenOptions={{
+                headerShown: false
+            }}
+            initialRouteName="MainScreen">
+          <Stack.Screen
+              name="MainScreen"
+              component={MainScreen}
+          />
+            <Stack.Screen
+                name="AttributeScreen"
+                component={AttributeScreen}
+            />
+            <Stack.Screen
+                name="AllergyScreen"
+                component={AllergyScreen}
+            />
+            <Stack.Screen
+                name="CustomScreen"
+                component={CustomScreen}
+            />
+            <Stack.Screen
+                name="EndScreen"
+                component={EndScreen}
+            />
 
-        <Box alignItems="center" >
-          <Pressable onPress={() => console.log("I'm Pressed")} borderWidth="3" borderColor="black" w="96" shadow="3" bg="white" p="5">
-            <Box>
-              <Link href=""></Link>
-              <Text color="coolGray.800" fontWeight="medium" fontSize="6xl">
-                English
-              </Text>
-            </Box>
-          </Pressable>
-        </Box>
-
-        <Box alignItems="center" >
-          <Pressable onPress={() => console.log("I'm Pressed")} borderWidth="3" borderColor="black" w="96" shadow="3" bg="white" p="5">
-            <Box>
-              <Link href=""></Link>
-              <Text color="coolGray.800" fontWeight="medium" fontSize="6xl">
-                中文
-              </Text>
-            </Box>
-          </Pressable>
-        </Box>
-      </VStack>
-
-      
-    </NativeBaseProvider>
+        </Stack.Navigator>
+      </NavigationContainer>
   );
 }
